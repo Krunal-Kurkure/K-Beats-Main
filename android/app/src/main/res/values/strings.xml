@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">K-Beats</string>
+  <string name="widget_small_name">KKMusic Small Player</string>
+  <string name="widget_big_name">KKMusic Player</string>
+  <string name="widget_small_description"
+    >Small KKMusic playback controls</string
+  >
+  <string name="widget_big_description">Large KKMusic playback controls</string>
+</resources>

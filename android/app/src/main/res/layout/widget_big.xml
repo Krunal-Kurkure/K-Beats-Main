@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/big_root"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/widget_big_background"
+
+    android:orientation="vertical"
+
+    android:paddingStart="8dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="8dp"
+    android:paddingBottom="4dp">
+
+    <!-- ====================================================== -->
+    <!-- ARTWORK AREA                                            -->
+    <!-- ====================================================== -->
+
+    <FrameLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_weight="1"
+
+        android:clipToPadding="false">
+
+        <!-- ================================================== -->
+        <!-- ARTWORK                                               -->
+        <!-- ================================================== -->
+
+        <ImageView
+            android:id="@+id/big_artwork"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/widget_big_artwork_background"
+
+            android:clipToOutline="true"
+
+            android:scaleType="centerCrop" />
+
+        <!-- ================================================== -->
+        <!-- GRADIENT OVERLAY                                      -->
+        <!-- ================================================== -->
+
+        <ImageView
+    android:id="@+id/big_artwork_gradient"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_gravity="center"
+
+    android:background="@drawable/widget_big_artwork_gradient"
+
+    android:clickable="false"
+    android:focusable="false"
+    android:importantForAccessibility="no" />
+
+        <!-- ================================================== -->
+        <!-- SONG TITLE + ARTIST                                   -->
+        <!-- ================================================== -->
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="bottom"
+
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="20dp"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/big_title"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:ellipsize="end"
+
+                android:fontFamily="sans"
+
+                android:includeFontPadding="false"
+
+                android:maxLines="1"
+
+                android:shadowColor="#CC000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="4"
+
+                android:text="Jab Tak"
+
+                android:textColor="#FFFFFFFF"
+
+                android:textSize="20sp"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/big_artist"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="2dp"
+
+                android:ellipsize="end"
+
+                android:fontFamily="sans"
+
+                android:includeFontPadding="false"
+
+                android:maxLines="1"
+
+                android:shadowColor="#CC000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="3"
+
+                android:text="Arijit Singh"
+
+                android:textColor="#FFFFFFFF"
+
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <!-- ================================================== -->
+        <!-- SEEK / PROGRESS BAR                                  -->
+        <!-- ================================================== -->
+
+        <ProgressBar
+
+            android:id="@+id/big_progress"
+
+            style="@android:style/Widget.ProgressBar.Horizontal"
+
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+
+            android:layout_gravity="bottom"
+
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="9dp"
+
+            android:indeterminate="false"
+
+            android:max="1000"
+
+            android:progress="0"
+
+            android:progressDrawable="@drawable/widget_progress_drawable" />
+
+    </FrameLayout>
+
+    <!-- ====================================================== -->
+    <!-- CONTROL ROW                                             -->
+    <!-- ====================================================== -->
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:gravity="center_vertical"
+
+        android:orientation="horizontal">
+
+        <!-- ================================================== -->
+        <!-- SHUFFLE                                               -->
+        <!-- ================================================== -->
+
+        <FrameLayout
+            android:id="@+id/big_shuffle_slot"
+
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/big_shuffle_icon"
+
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_widget_shuffle" />
+
+        </FrameLayout>
+
+        <!-- ================================================== -->
+        <!-- PREVIOUS                                              -->
+        <!-- ================================================== -->
+
+        <FrameLayout
+            android:id="@+id/big_previous_slot"
+
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/big_previous_icon"
+
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_widget_prev" />
+
+        </FrameLayout>
+
+        <!-- ================================================== -->
+        <!-- PLAY                                                  -->
+        <!-- ================================================== -->
+
+        <FrameLayout
+            android:id="@+id/big_play_slot"
+
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/big_play_icon"
+
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_widget_play"
+
+                android:tint="@color/widget_pink" />
+
+        </FrameLayout>
+
+        <!-- ================================================== -->
+        <!-- NEXT                                                   -->
+        <!-- ================================================== -->
+
+        <FrameLayout
+            android:id="@+id/big_next_slot"
+
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/big_next_icon"
+
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_widget_next" />
+
+        </FrameLayout>
+
+        <!-- ================================================== -->
+        <!-- REPEAT                                                -->
+        <!-- ================================================== -->
+
+        <FrameLayout
+            android:id="@+id/big_repeat_slot"
+
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/big_repeat_icon"
+
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_widget_repeat" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

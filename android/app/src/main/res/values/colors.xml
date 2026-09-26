@@ -1,0 +1,9 @@
+<resources>
+    <color name="widget_white">#FFFFFFFF</color>
+    <color name="widget_black">#FF000000</color>
+    <color name="widget_artist">#FF777777</color>
+    <color name="widget_muted">#FFBBBBBB</color>
+    <color name="widget_progress_track">#FFE2E2E2</color>
+    <color name="widget_pink">#FFFF0050</color>
+    <color name="widget_placeholder">#FFE8E8E8</color>
+</resources>

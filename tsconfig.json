@@ -1,0 +1,8 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": ["jest"],
+  },
+  "include": ["**/*.ts", "**/*.tsx", "App.jsx", "src/components/LiquidGlassPlayer.tsx", "src/native/WidgetPinModule.js", "src/player/WidgetPlaybackSync.js"],
+  "exclude": ["**/node_modules", "**/Pods"]
+}
