@@ -143,14 +143,6 @@ const Home = () => {
     ? insets.bottom + MUSIC_CARD_BASE_HEIGHT + DEFAULT_SPACING
     : insets.bottom + DEFAULT_SPACING;
 
-  //------------------- HEIGHT FOR AI STEM BOTTOM BUTTON -------------------------------
-  const MUSIC_CARD_BASE_HEIGHTAi = 75;
-  const DEFAULT_SPACINGAi = 83;
-
-  const dynamicButtonBottomAi = currentTrack
-    ? insets.bottom + MUSIC_CARD_BASE_HEIGHTAi + DEFAULT_SPACINGAi
-    : insets.bottom + DEFAULT_SPACINGAi;
-
   // -------------------- HANDLE MINI PLAYER STATE TO OPEN MINI PLAYER ---------------------------
   const [isMiniPlayerActive, setIsMiniPlayerActive] = useState(false);
 
@@ -652,19 +644,6 @@ const Home = () => {
         {/* ------------------------------------- APP GUIDE MODAL ------------------------------- */}
         <InfoGuide visible={showGuide} onClose={() => setShowGuide(false)} />
 
-        {/* ------------------------------ FLOATING AI STEM BUTTON ------------------------------- */}
-        <TouchableOpacity
-          style={[styles.AifloatingButton, { bottom: dynamicButtonBottomAi }]}
-          onPress={() => navigation.navigate('AiStack')}
-          activeOpacity={0.8}
-        >
-          <Image
-            source={require('../assets/aiLogoMain.png')}
-            style={styles.aiButtonImage}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-
         {/* ----------------------- FLOATING IMPORT + BUTTON -------------------------------- */}
         <TouchableOpacity
           style={[styles.floatingButton, { bottom: dynamicButtonBottom }]}
@@ -1148,26 +1127,6 @@ const styles = StyleSheet.create({
   //  ==================================== SAFEAREA CONTAINER
   container: {
     flex: 1,
-  },
-
-  //  ==================================== AI FLOATING BUTTON
-  AifloatingButton: {
-    position: 'absolute',
-    right: 21,
-    zIndex: 99,
-    elevation: 5,
-    width: 40,
-    height: 40,
-    borderRadius: 15,
-    backgroundColor: '#414141',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  //  ==================================== AI FLOATING BUTTON IMAGE
-  aiButtonImage: {
-    width: 20,
-    height: 20,
   },
 
   //  ==================================== IMORT FLOATING BUTTON

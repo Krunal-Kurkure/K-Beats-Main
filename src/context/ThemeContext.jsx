@@ -1,8 +1,8 @@
 // context/ThemeContext.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Platform, StatusBar } from 'react-native';
-import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import SystemNavigationBar from 'react-native-system-navigation-bar';
 
 const ThemeContext = createContext();
 
@@ -76,20 +76,16 @@ export const ThemeProvider = ({ children }) => {
   // This runs globally. You don't need to add this code to every screen anymore.
   useEffect(() => {
     if (Platform.OS === 'android') {
-      try {
-        if (isFancyMode) {
-          // Dark Mode: Black Nav Bar, White Icons
-          changeNavigationBarColor('#414141', false);
-          StatusBar.setBarStyle('light-content');
-          StatusBar.setBackgroundColor('#000000'); // Or transparent if you prefer
-        } else {
-          // Light Mode: White Nav Bar, Black Icons
-          changeNavigationBarColor('#ffffff', true);
-          StatusBar.setBarStyle('dark-content');
-          StatusBar.setBackgroundColor('#ffffff');
-        }
-      } catch (e) {
-        console.log('Theme Error:', e);
+      if (isFancyMode) {
+        // Dark Mode: Dark grey Nav Bar, Light (white) Icons
+        SystemNavigationBar.setNavigationColor('#414141', 'light');
+        StatusBar.setBarStyle('light-content');
+        StatusBar.setBackgroundColor('#000000');
+      } else {
+        // Light Mode: White Nav Bar, Dark (black) Icons
+        SystemNavigationBar.setNavigationColor('#ffffff', 'dark');
+        StatusBar.setBarStyle('dark-content');
+        StatusBar.setBackgroundColor('#ffffff');
       }
     }
   }, [isFancyMode]);

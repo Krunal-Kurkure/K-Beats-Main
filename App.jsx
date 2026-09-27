@@ -4,9 +4,9 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 
 // Providers
+import { EditSongProvider } from './src/context/EditSongContext';
 import { PlayerProvider } from './src/context/PlayerContext';
 import { ThemeProvider } from './src/context/ThemeContext';
-import { EditSongProvider } from './src/context/EditSongContext';
 import { TrimSongProvider } from './src/context/TrimSongContext';
 
 // Import the Native Floating Player Controller
@@ -23,11 +23,10 @@ import LyricsScreen from './src/screens/LyricsScreen';
 import MusicPlayer from './src/screens/MusicPlayer';
 import Onboarding from './src/screens/Onboarding';
 import Search from './src/screens/Search';
-import SplashScreen from './src/screens/SplashScreen';
 import Setting from './src/screens/Setting';
+import SplashScreen from './src/screens/SplashScreen';
 
 //----------- 05/06/26 Ai Stack-----------------------------------------------------------------------------------------------------
-import AiNav from './src/navigation/AiNav';
 
 const Stack = createStackNavigator();
 
@@ -70,9 +69,6 @@ const App = () => {
                   name="AllArtistScreen"
                   component={AllArtistScreen}
                 />
-
-                {/* ----------------------------------- 05/06/26 Ai Stack-----------------------------------------------------------------  */}
-                <Stack.Screen name="AiStack" component={AiNav} />
               </Stack.Navigator>
             </NavigationContainer>
           </TrimSongProvider>

@@ -601,14 +601,6 @@ const MusicPlayer = () => {
                 <View style={styles.listVisualizer}>
                   <TouchableOpacity onPress={changeColor}>
                     <Feather
-                      name="droplet"
-                      size={20}
-                      color={isDarkList ? '#FFFFFF' : '#000000'}
-                    />
-                  </TouchableOpacity>
-                  {/* // --------------------------------------------------------------------------------------------------------------------------------------------------- IMPLELEMTATION REMAINS  */}
-                  <TouchableOpacity onPress={changeColor}>
-                    <Feather
                       name="chevron-right"
                       size={20}
                       color={isDarkList ? '#FFFFFF' : '#000000'}
@@ -684,30 +676,15 @@ const MusicPlayer = () => {
 
             {!showGrid ? (
               <View style={styles.PlayControlsBtns}>
-                <View
-                  style={[
-                    styles.sideContolBtn,
-                    {
-                      backgroundColor: BtnBg,
-                    },
-                  ]}
-                >
-                  <TouchableOpacity
-                    style={[styles.sideBtnOuter, { marginLeft: 2.5 }]}
-                    onPress={() =>
-                      navigation.navigate('AiStack', {
-                        screen: 'AiExtractedSong',
-                      })
-                    }
-                  >
+                <View style={styles.sideContolBtn}>
+                  <View style={[styles.sideBtnOuter, { marginLeft: 2.5 }]}>
                     <View style={styles.sideBtnInner}>
-                      <Image
-                        source={require('./../assets/aiLogoMain.png')}
-                        style={{ width: 20, height: 20 }}
-                        resizeMode="contain"
-                      />
+                      <TouchableOpacity onPress={changeColor}>
+                        <Feather name="droplet" size={20} color="#fff" />
+                      </TouchableOpacity>
                     </View>
-                  </TouchableOpacity>
+                  </View>
+
                   <TouchableOpacity
                     style={{ padding: 8 }}
                     onPress={toggleShuffle}
@@ -715,7 +692,7 @@ const MusicPlayer = () => {
                     <FontAwesome6
                       name="shuffle"
                       size={20}
-                      color={isShuffle ? textColor : subTextColor}
+                      color={isShuffle ? textColor : subTextColor2}
                     />
                   </TouchableOpacity>
                 </View>
@@ -750,15 +727,7 @@ const MusicPlayer = () => {
                   </TouchableOpacity>
                 </View>
 
-                {/* //  */}
-                <View
-                  style={[
-                    styles.sideContolBtn,
-                    {
-                      backgroundColor: BtnBg,
-                    },
-                  ]}
-                >
+                <View style={styles.sideContolBtn}>
                   <TouchableOpacity
                     style={{ padding: 8 }}
                     onPress={toggleRepeat}
@@ -767,13 +736,13 @@ const MusicPlayer = () => {
                       <FontAwesome6
                         name="repeat"
                         size={20}
-                        color={repeatMode > 0 ? textColor : subTextColor}
+                        color={repeatMode > 0 ? textColor : subTextColor2}
                       />
                       {repeatMode === 1 && (
                         <Text
                           style={[
                             styles.repeatBtn,
-                            { color: repeatMode ? textColor : subTextColor },
+                            { color: repeatMode ? textColor : subTextColor2 },
                           ]}
                         >
                           1
@@ -781,8 +750,6 @@ const MusicPlayer = () => {
                       )}
                     </View>
                   </TouchableOpacity>
-
-                  {/* // */}
 
                   <TouchableOpacity
                     style={[styles.sideBtnOuter, { marginRight: 2.5 }]}
@@ -1055,7 +1022,7 @@ const styles = StyleSheet.create({
   listVisualizer: {
     height: '100%',
     paddingVertical: 9,
-    paddingRight: 8,
+    paddingRight: 6,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -1106,7 +1073,6 @@ const styles = StyleSheet.create({
 
   PlayControlsBtns: {
     alignItems: 'center',
-    paddingHorizontal: 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -1153,7 +1119,7 @@ const styles = StyleSheet.create({
   },
 
   repeatBtn: {
-    top: 4,
+    top: 5,
     fontSize: 8,
     fontWeight: 'bold',
     position: 'absolute',

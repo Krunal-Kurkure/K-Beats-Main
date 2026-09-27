@@ -1,27 +1,22 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   FlatList,
   Image,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MusicLyricsButton from './MusicLyricsButton';
 import { usePlayer } from '../context/PlayerContext';
 import { getArtistCollections } from '../storage/storage';
-import { useNavigation } from '@react-navigation/native';
+import MusicLyricsButton from './MusicLyricsButton';
 
-// ---------------- ICONS IMPORTS -------------------
-import Feather from 'react-native-vector-icons/Feather';
 
 const CARD_WIDTH = 320;
 const CARD_HEIGHT = 320;
 
 const MusicCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
-  // ---------------- USING NAVIGATIONS ----------------
-  const navigation = useNavigation();
 
   const listRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,9 +24,6 @@ const MusicCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
   const { currentTrack } = usePlayer();
 
   const [artistCollections, setArtistCollections] = useState([]);
-
-  // --------------------- THEME CONTEXT --------------------------
-  const textColor = isFancyMode ? '#fff' : '#000';
 
   // ---------------- FETCH ALL ARTISTS ----------------
   useEffect(() => {
@@ -122,40 +114,6 @@ const MusicCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
             <Ionicons name="musical-note" size={40} color="#777" />
           </View>
         )}
-
-        {/* /extracted songs / */}
-        <View style={{ position: 'absolute', bottom: 70, right: 20 }}>
-          <TouchableOpacity
-            style={{
-              height: 40,
-              borderRadius: 100,
-              backgroundColor: '#00000078',
-              flexDirection: 'row',
-              alignItems: 'center',
-              overflow: 'hidden',
-            }}
-            onPress={() =>
-              navigation.navigate('AiStack', {
-                screen: 'AiExtractedSong',
-              })
-            }
-          >
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Image
-                source={require('./../assets/aiLogoMain.png')}
-                style={{ width: 20, height: 20 }}
-                resizeMode="contain"
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
 
         <MusicLyricsButton isPlaying={isPlaying} />
         {renderDots()}

@@ -24,11 +24,9 @@
     "react-native-gesture-handler": "^2.30.0",
     "react-native-image-picker": "^8.2.1",
     "react-native-linear-gradient": "^2.8.3",
-    "react-native-navigation-bar-color": "^2.0.2",
     "react-native-quick-sqlite": "^8.2.7",
     "react-native-safe-area-context": "^5.6.2",
     "react-native-screens": "^4.19.0",
-    "react-native-sound": "^0.13.0",
     "react-native-system-navigation-bar": "^2.8.0",
     "react-native-track-player": "^5.0.0-alpha0-nightly-359af5a12d712d3b685530aed9b9625865a25d74",
     "react-native-vector-icons": "^10.3.0"
