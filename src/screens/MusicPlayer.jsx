@@ -25,6 +25,7 @@ import {
 import MarqueeText from '../components/MarqueeText';
 import CustomSlider from '../components/CustomSlider';
 import MusicCarousel from '../components/MusicCarousel';
+import MusicSmallCarousel from '../components/MusicSmallCarousel';
 import MusicVisualizer from '../components/MusicVisualizer';
 import AiBackgroundWrapper from '../components/AiBackgroundWrapper';
 
@@ -90,41 +91,22 @@ const MusicPlayer = () => {
     getSleepRemaining,
   } = usePlayer();
 
-  // ----------------------- HERE ARE THE COLORS STATE AND COLOR FOR CARD ---------------------
-  const [colorIndex, setColorIndex] = useState(0);
-
-  // ----------------------- 9 COLORS BYDEFAULT WHITE IS SET -----------------------
-  const colors = [
-    '#ffffff',
-    '#FFFD70',
-    '#ffc79a',
-    '#cfffcf',
-    '#ff768f',
-    '#bea8ff',
-    '#8db7ff',
-    '#636363',
-    '#252525',
-  ];
-  const currentColor = colors[colorIndex];
-  const isDarkList = [
-    '#252525',
-    '#bea8ff',
-    '#636363',
-    '#ff768f',
-    '#8db7ff',
-  ].includes(currentColor);
-
   // --------------------- THEME CONTEXT & GRID CHANGE STATE AND ASYNC MEMORY STATES --------------------------
-  const { isFancyMode, toggleView, showGrid, isReady, isAnimationEnabled } =
-    useTheme();
+  const {
+    isFancyMode,
+    toggleView,
+    showGrid,
+    isReady,
+    isAnimationEnabled,
+    changeColor,
+  } = useTheme();
+
   const textColor = isFancyMode ? '#fff' : '#000';
   const iconColor = isFancyMode ? '#fff' : '#000';
   const ImgBg = isFancyMode ? '#000000dc' : '#fff';
   const ImgBg2 = isFancyMode ? '#565656' : '#e0e0e0';
-  const BtnBg = isFancyMode ? '#656565' : '#797979e4';
   const SongDescCol = isFancyMode ? '#cececeff' : 'grey';
   const ListBg = isFancyMode ? '#00000035' : '#e8e9f1';
-  const subTextColor = isFancyMode ? '#0b0b0ba2' : '#fff';
   const subTextColor2 = isFancyMode ? '#656565' : '#797979e4';
   const HeadCol = isFancyMode ? 'rgba(169, 169, 169, 0.65)' : '#E4E4E4';
 
@@ -137,23 +119,6 @@ const MusicPlayer = () => {
     { label: '15 minutes', minutes: 15 },
     { label: '20 minutes', minutes: 20 },
   ];
-
-  // 1. Load the saved color when the screen first renders
-  useEffect(() => {
-    const loadSavedColor = async () => {
-      try {
-        const savedIndex = await AsyncStorage.getItem('savedColorIndex');
-        if (savedIndex !== null) {
-          // AsyncStorage saves data as strings, so we parse it back to a number
-          setColorIndex(parseInt(savedIndex, 9));
-        }
-      } catch (error) {
-        console.error('Error loading color index:', error);
-      }
-    };
-
-    loadSavedColor();
-  }, []); // The empty array ensures this only runs once when the screen mounts
 
   useEffect(() => {
     mountedRef.current = true;
@@ -424,21 +389,6 @@ const MusicPlayer = () => {
     );
   };
 
-  //  // ---------------- COLOR CHANGE FUNCTION WITH COLOR STORAGE ------------------------------
-  const changeColor = async () => {
-    const nextIndex = (colorIndex + 1) % colors.length;
-
-    // Update the UI immediately
-    setColorIndex(nextIndex);
-
-    // Save the new index to storage in the background
-    try {
-      await AsyncStorage.setItem('savedColorIndex', nextIndex.toString());
-    } catch (error) {
-      console.error('Error saving color index:', error);
-    }
-  };
-
   // NEW: If AsyncStorage is still checking memory, show a blank background
   if (!isReady) {
     return (
@@ -532,82 +482,12 @@ const MusicPlayer = () => {
                 ==================================================================================================== */}
           {!showGrid ? (
             <>
-              <View
-                style={[
-                  styles.listTopCard,
-                  {
-                    backgroundColor: colors[colorIndex],
-                    borderWidth: currentColor === '#ffffff' ? 1 : 0,
-                  },
-                ]}
-              >
-                <View style={styles.listImageCard}>
-                  {currentTrack.artwork ? (
-                    <Image
-                      key={currentTrack.id}
-                      source={{ uri: currentTrack.artwork }}
-                      style={styles.listColoredImg}
-                    />
-                  ) : (
-                    <View
-                      key={currentTrack.id}
-                      style={[styles.listEmptyImg, { backgroundColor: ImgBg2 }]}
-                    >
-                      <Ionicons name="musical-note" size={40} color="#777" />
-                    </View>
-                  )}
-                </View>
-
-                <View style={styles.listSongInfo}>
-                  <Text
-                    style={[
-                      styles.listSongName,
-                      {
-                        color: [
-                          '#ffffff',
-                          '#FFFD70',
-                          '#ffc79a',
-                          '#cfffcf',
-                        ].includes(colors[colorIndex])
-                          ? '#000'
-                          : '#fff',
-                      },
-                    ]}
-                    numberOfLines={2}
-                  >
-                    {currentTrack.title}
-                  </Text>
-
-                  <Text
-                    style={[
-                      styles.listSongDesc,
-                      {
-                        color: [
-                          '#ffffff',
-                          '#FFFD70',
-                          '#ffc79a',
-                          '#cfffcf',
-                        ].includes(colors[colorIndex])
-                          ? '#000'
-                          : '#fff',
-                      },
-                    ]}
-                    numberOfLines={2}
-                  >
-                    {currentTrack.description || 'Unknown Artist'}
-                  </Text>
-                </View>
-
-                <View style={styles.listVisualizer}>
-                  <TouchableOpacity onPress={changeColor}>
-                    <Feather
-                      name="chevron-right"
-                      size={20}
-                      color={isDarkList ? '#FFFFFF' : '#000000'}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <MusicSmallCarousel
+                currentTrack={currentTrack}
+                isPlaying={isPlaying}
+                ImgBg2={ImgBg2}
+                isFancyMode={isFancyMode}
+              />
 
               <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -677,13 +557,16 @@ const MusicPlayer = () => {
             {!showGrid ? (
               <View style={styles.PlayControlsBtns}>
                 <View style={styles.sideContolBtn}>
-                  <View style={[styles.sideBtnOuter, { marginLeft: 2.5 }]}>
+                  <TouchableOpacity
+                    style={[styles.sideBtnOuter, { marginRight: 2.5 }]}
+                    onPress={changeColor}
+                  >
                     <View style={styles.sideBtnInner}>
-                      <TouchableOpacity onPress={changeColor}>
-                        <Feather name="droplet" size={20} color="#fff" />
-                      </TouchableOpacity>
+                      <View style={styles.lyricsBtn}>
+                        <Feather name="droplet" size={20} color={'#fff'} />
+                      </View>
                     </View>
-                  </View>
+                  </TouchableOpacity>
 
                   <TouchableOpacity
                     style={{ padding: 8 }}

@@ -20,6 +20,41 @@ export const ThemeProvider = ({ children }) => {
   // NEW: State to hold off rendering until memory is checked
   const [isReady, setIsReady] = useState(false);
 
+  // ----------------------- HERE ARE THE COLORS STATE AND COLOR FOR CARD ---------------------
+  const [colorIndex, setColorIndex] = useState(0);
+
+  // ----------------------- 9 COLORS BYDEFAULT WHITE IS SET -----------------------
+  const colors = [
+    '#ffffff',
+    '#FFFD70',
+    '#ffc79a',
+    '#cfffcf',
+    '#ff768f',
+    '#bea8ff',
+    '#8db7ff',
+    '#636363',
+    '#252525',
+  ];
+
+  const currentColor = colors[colorIndex];
+
+  // 1. Load the saved color when the screen first renders
+  useEffect(() => {
+    const loadSavedColor = async () => {
+      try {
+        const savedIndex = await AsyncStorage.getItem('savedColorIndex');
+        if (savedIndex !== null) {
+          // AsyncStorage saves data as strings, so we parse it back to a number
+          setColorIndex(parseInt(savedIndex, 9));
+        }
+      } catch (error) {
+        console.error('Error loading color index:', error);
+      }
+    };
+
+    loadSavedColor();
+  }, []); // The empty array ensures this only runs once when the screen mounts
+
   // -------------------------- LOAD THE SAVED STATE WHEN THE COMPONET MOUNT --------------------
   useEffect(() => {
     const loadViewState = async () => {
@@ -90,6 +125,21 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [isFancyMode]);
 
+  //  // ---------------- COLOR CHANGE FUNCTION WITH COLOR STORAGE ------------------------------
+  const changeColor = async () => {
+    const nextIndex = (colorIndex + 1) % colors.length;
+
+    // Update the UI immediately
+    setColorIndex(nextIndex);
+
+    // Save the new index to storage in the background
+    try {
+      await AsyncStorage.setItem('savedColorIndex', nextIndex.toString());
+    } catch (error) {
+      console.error('Error saving color index:', error);
+    }
+  };
+
   return (
     <ThemeContext.Provider
       value={{
@@ -101,6 +151,12 @@ export const ThemeProvider = ({ children }) => {
         showGrid,
         setShowGrid,
         isReady,
+
+        colors,
+        colorIndex,
+        setColorIndex,
+        changeColor,
+        currentColor,
       }}
     >
       {children}
