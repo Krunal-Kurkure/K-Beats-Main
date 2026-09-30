@@ -443,6 +443,7 @@ const MusicSmallCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
     }
 
     return (
+
       <View style={styles.genreChipsContainer}>
         {genres.map((genre, index) => (
           <View
@@ -744,10 +745,11 @@ const MusicSmallCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
     const description =
       artist?.bio || artist?.description || 'No bio added yet.';
 
-    const artistDate = getArtistDate(artist);
-
     return (
       <View style={styles.artistExpandedInner}>
+           {
+                 renderExpandedGenreChips(artist)
+                }
         <Text style={[styles.expandedDescription, artistSecondaryTextStyle]}>
           {description}
         </Text>
@@ -895,11 +897,7 @@ const MusicSmallCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
                     TEXT ONLY, NOT CHIPS
                 --------------------------------------- */}
 
-                {!expandedArtistKey ? 
-                 
-                 renderCompactGenres(artist) :
-                 renderExpandedGenreChips(artist)
-                }
+             
 
               {/* ---------------------------------------
                     DOB
@@ -917,15 +915,11 @@ const MusicSmallCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
                   <Text
                     style={[styles.compactDobText, artistSecondaryTextStyle]}
                   >
-                    DOB
-                  </Text>
-
-                  <Text
+                    DOB -</Text><Text
                     numberOfLines={1}
                     ellipsizeMode="tail"
                     style={[styles.compactDobValue, artistTextDynamicStyle]}
-                  >
-                    {artistDate || 'Not available'}
+                  >{artistDate || 'Not available'}
                   </Text>
                 </View>
               ) : null}
@@ -1025,7 +1019,7 @@ const MusicSmallCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
         <View style={styles.fallbackContent}>
           <Ionicons
             name="person-circle-outline"
-            size={55}
+            size={50}
             color={theme.secondaryText}
           />
 
@@ -1333,8 +1327,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     minWidth: 0,
-    marginTop: 1,
-    marginBottom: 2,
+    marginTop: 5,
   },
 
   compactDobText: {
@@ -1506,24 +1499,11 @@ const styles = StyleSheet.create({
   },
 
   // ==================================================
-  // FULL DESCRIPTION LABEL
-  // ==================================================
-
-  expandedDescriptionLabel: {
-    fontSize: 9,
-    lineHeight: 13,
-    fontWeight: '700',
-    letterSpacing: 0.6,
-    marginBottom: 5,
-  },
-
-  // ==================================================
   // FULL DESCRIPTION
   // ==================================================
 
   expandedDescription: {
     fontSize: 11,
-    lineHeight: 17,
     fontWeight: '400',
   },
 
@@ -1582,7 +1562,7 @@ const styles = StyleSheet.create({
     gap: 6,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    paddingHorizontal: 40,
   },
 
   fallbackTitle: {
@@ -1593,6 +1573,6 @@ const styles = StyleSheet.create({
   fallbackText: {
     fontSize: 10,
     lineHeight: 14,
-    textAlign: 'center',
+    textAlign: 'left',
   },
 });
