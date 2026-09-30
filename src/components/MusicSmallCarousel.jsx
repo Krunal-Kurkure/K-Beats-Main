@@ -275,17 +275,6 @@ const MusicSmallCarousel = ({ isPlaying, ImgBg2, isFancyMode }) => {
   );
 
   // ==================================================
-  // BORDER STYLE FOR +GENRE CHIP
-  // ==================================================
-
-  const moreGenreDynamicStyle = useMemo(
-    () => ({
-      borderColor: theme.secondaryText,
-    }),
-    [theme.secondaryText],
-  );
-
-  // ==================================================
   // DATE HELPERS
   // ==================================================
 
@@ -1426,7 +1415,6 @@ const styles = StyleSheet.create({
 
   moreButtonText: {
     fontSize: 10,
-    marginBottom:3,
     fontWeight: '700',
   },
 
