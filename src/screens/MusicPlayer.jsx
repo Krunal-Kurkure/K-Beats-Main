@@ -913,7 +913,7 @@ const styles = StyleSheet.create({
   //  ==================================== SCROLL CONTAINER
   scrollConatiner: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 6,
   },
 
   //  ==================================== GRID CONTAINER BODY
